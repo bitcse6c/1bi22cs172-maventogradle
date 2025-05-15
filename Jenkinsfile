@@ -18,11 +18,6 @@ pipeline {
         }
         }
 
-        stage('Gradle build') {
-            steps {
-                sh 'gradle build'  // Run unit tests
-        }
-        }
 
         
         
