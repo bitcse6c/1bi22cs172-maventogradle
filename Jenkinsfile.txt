@@ -1,0 +1,47 @@
+pipeline {
+    agent any  
+
+    tools {
+        maven 'Maven'  
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'  // Run Maven build
+            }
+        }
+
+        stage('Gradle build') {
+            steps {
+                sh 'gradle build'  // Run unit tests
+            }
+        }
+
+        
+        
+       
+        stage('Run Application') {
+            steps {
+                
+                sh 'java -jar '
+            }
+        }
+
+        
+    }
+
+    post {
+        success {
+            echo 'Build successful!'
+        }
+        failure {
+            echo 'Build failed'
+        }
+    }
+}
