@@ -2,25 +2,26 @@ pipeline {
     agent any  
 
     tools {
-        maven 'Maven'  
+        maven 'Maven'
+        gradle 'Gradle'
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/'
-            }
+                git branch: 'master', url: 'https://github.com/bitcse6c/1bi22cs172-maventogradle.git'
+        }
         }
 
         stage('Build') {
             steps {
                 sh 'mvn clean package'  // Run Maven build
-            }
+        }
         }
 
         stage('Gradle build') {
             steps {
                 sh 'gradle build'  // Run unit tests
-            }
+        }
         }
 
         
@@ -28,9 +29,8 @@ pipeline {
        
         stage('Run Application') {
             steps {
-                
-                sh 'java -jar '
-            }
+                sh 'mvn exec:java -Dexec.mainClass='com.example.App''
+        }
         }
 
         
@@ -38,10 +38,10 @@ pipeline {
 
     post {
         success {
-            echo 'Build successful!'
+            echo 'Build successful'
         }
         failure {
             echo 'Build failed'
-        }
-    }
+}
+}
 }
